@@ -16,6 +16,7 @@ export const EmailSenderService = async (props: TEmailProps) => {
   let secretPwd: string;
 
   try {
+
     const response = await client.send(
       new GetSecretValueCommand({
         SecretId: process.env.ENV_AWS_SECRET_MANAGER
@@ -26,34 +27,38 @@ export const EmailSenderService = async (props: TEmailProps) => {
 
     secretEmail = object.EMAIL;
     secretPwd = object.EMAIL_KEY;
+
+    const { email, subject, message } = props;
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: secretEmail,
+        pass: secretPwd
+      }
+    });
+
+    const mailOptions = {
+      from: secretEmail,
+      to: secretEmail,
+      subject: '(Portfolio-V2) From: ' + email + " " + subject,
+      text: message
+    };
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, function(err, info){
+        if (err) {
+          reject(err.message);
+        } else {
+          console.log('Email sent: ' + info.response);
+          resolve('Email sent');
+        }
+      });
+    });
+
   } catch (err) {
     console.error(err);
 
     throw new Error(err.message);
   }
-
-  const { email, subject, message } = props;
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: secretEmail,
-      pass: secretPwd
-    }
-  });
-
-  const mailOptions = {
-    from: secretEmail,
-    to: secretEmail,
-    subject: '(Portfolio-V2) From: ' + email + " " + subject,
-    text: message
-  };
-  
-  transporter.sendMail(mailOptions, function(err, info){
-    if (err) {
-      throw new Error(err.message);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
 }

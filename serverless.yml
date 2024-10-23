@@ -10,7 +10,7 @@ provider:
   name: aws	
   endpointType: REGIONAL
   deploymentMethod: direct
-  runtime: nodejs16.x
+  runtime: nodejs20.x
   region: ap-southeast-1
   environment:
     ${file(./env/env.yml)}
@@ -30,6 +30,10 @@ provider:
         - lambda:*
       Resource:
         - arn:aws:lambda:ap-southeast-1:*:function:Portfolio_V2_*
+    - Effect: Allow
+      Action:
+        - secretsmanager:*
+      Resource: '*'
 functions:
   ${file(./functions/functions.yml)}
 # layers: 
