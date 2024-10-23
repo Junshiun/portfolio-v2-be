@@ -12,8 +12,8 @@ const client = new SecretsManagerClient({
 
 export const EmailSenderService = async (props: TEmailProps) => {
 
-  let secretEmail: string;
-  let secretPwd: string;
+  let privateEmail: string;
+  let privatePwd: string;
 
   try {
 
@@ -25,8 +25,8 @@ export const EmailSenderService = async (props: TEmailProps) => {
 
     const object = JSON.parse(response.SecretString);
 
-    secretEmail = object.EMAIL;
-    secretPwd = object.EMAIL_KEY;
+    privateEmail = object.EMAIL;
+    privatePwd = object.EMAIL_KEY;
 
     const { email, subject, message } = props;
 
@@ -35,14 +35,14 @@ export const EmailSenderService = async (props: TEmailProps) => {
       port: 587, // Port for TLS
       secure: false, // Use TLS
       auth: {
-        user: secretEmail,
-        pass: secretPwd
+        user: privateEmail,
+        pass: privatePwd
       }
     });
 
     const mailOptions = {
-      from: secretEmail,
-      to: secretEmail,
+      from: privateEmail,
+      to: privateEmail,
       subject: '(Portfolio-V2) From: ' + email + " " + subject,
       text: message
     };
