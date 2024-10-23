@@ -1,0 +1,38 @@
+service: portfolio-v2-service
+package: 
+  individually: true
+plugins: 
+  - serverless-offline
+build:
+  esbuild:
+    minify: true
+provider: 
+  name: aws	
+  endpointType: REGIONAL
+  deploymentMethod: direct
+  runtime: nodejs16.x
+  region: ap-southeast-1
+  environment:
+    ${file(./env/env.yml)}
+  stackTags: 
+    Project: Portfolio-v2
+  # layers: 
+  #   - !Ref PortfolioLambdaLayer
+  apiGateway:
+    binaryMediaTypes:
+      - 'image/png'
+      - 'text/html'
+      - 'image/avif'
+      - 'image/webp'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:*
+      Resource:
+        - arn:aws:lambda:ap-southeast-1:*:function:Portfolio_V2_*
+functions:
+  ${file(./functions/functions.yml)}
+# layers: 
+#   portfolio-v2:
+#     path: portfolio-v2 # This folder will be created by the pipeline
+#     name: Portfolio_V2_Layer

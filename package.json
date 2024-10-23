@@ -1,0 +1,36 @@
+{
+  "name": "portfolio-v2-be",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --config=eslint.config.mjs",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/aws-lambda": "^8.10.145",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.8",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "serverless-esbuild": "^1.54.4",
+    "serverless-http": "^3.2.0",
+    "serverless-offline": "^14.3.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.11.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.675.0",
+    "@types/nodemailer": "^6.4.16",
+    "aws-sdk": "^2.1691.0",
+    "aws-serverless-express": "^3.4.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemailer": "^6.9.15"
+  }
+}
