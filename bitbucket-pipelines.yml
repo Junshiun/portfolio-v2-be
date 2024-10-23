@@ -1,15 +1,5 @@
 definitions: 
   steps: 
-    # - step: &linter-and-test
-    #     name: Run linter and unit tests
-    #     image: node:16-alpine
-    #     script: 
-    #       - npm install
-    #       - npm run lint
-    #       - npm run test
-    #     artifacts:
-    #       - coverage/**
-
     - step: &deploy-prod
         name: Deploy to production environment
         # trigger: manual
@@ -26,7 +16,6 @@ definitions:
           - mkdir -p ~/.aws
           - echo -e "[default]\naws_access_key_id = $AWS_ACCESS_KEY_ID\naws_secret_access_key = $AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
           - echo -e "source_profile = default" > ~/.aws/config
-          # - export AWS_DEFAULT_PROFILE=radioapp-prod
           - export AWS_SDK_LOAD_CONFIG=1
           # Deploy
           - sls deploy --verbose
