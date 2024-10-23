@@ -31,7 +31,9 @@ export const EmailSenderService = async (props: TEmailProps) => {
     const { email, subject, message } = props;
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com', // Gmail SMTP server
+      port: 587, // Port for TLS
+      secure: false, // Use TLS
       auth: {
         user: secretEmail,
         pass: secretPwd
