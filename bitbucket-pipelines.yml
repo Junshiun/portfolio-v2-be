@@ -28,6 +28,7 @@ definitions:
           # - export AWS_DEFAULT_PROFILE=radioapp-prod
           - export AWS_SDK_LOAD_CONFIG=1
           # Deploy
+          - sls login
           - sls deploy --verbose
 
 pipelines: 
