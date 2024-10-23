@@ -12,7 +12,7 @@ definitions:
 
     - step: &deploy-prod
         name: Deploy to production environment
-        trigger: manual
+        # trigger: manual
         image: node:16-alpine
         script: 
           - npm pkg delete scripts.prepare
