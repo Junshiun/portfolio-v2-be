@@ -24,7 +24,7 @@ definitions:
           # Setup AWS profile
           - mkdir -p ~/.aws
           - echo -e "[default]\naws_access_key_id = $AWS_ACCESS_KEY_ID\naws_secret_access_key = $AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
-          # - echo -e "[profile portfolio]\nrole_arn = arn:aws:iam::209459165772:role/bitbucket-pipelines\nsource_profile = default" > ~/.aws/config
+          - echo -e "source_profile = default" > ~/.aws/config
           # - export AWS_DEFAULT_PROFILE=radioapp-prod
           - export AWS_SDK_LOAD_CONFIG=1
           # Deploy
