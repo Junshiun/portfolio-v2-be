@@ -1,0 +1,39 @@
+definitions: 
+  steps: 
+    # - step: &linter-and-test
+    #     name: Run linter and unit tests
+    #     image: node:16-alpine
+    #     script: 
+    #       - npm install
+    #       - npm run lint
+    #       - npm run test
+    #     artifacts:
+    #       - coverage/**
+
+    - step: &deploy-prod
+        name: Deploy to production environment
+        trigger: manual
+        image: node:16-alpine
+        script: 
+          - npm pkg delete scripts.prepare
+          - npm install --production
+          - mkdir -p portfolio-v2/nodejs/node16
+          - cp -r node_modules portfolio-v2/nodejs/node16/
+          - npm install -g typescript
+          - npm install -g serverless@3.24.1
+          # Setup AWS profile
+          - mkdir -p ~/.aws
+          - echo -e "[default]\naws_access_key_id = $AWS_ACCESS_KEY_ID\naws_secret_access_key = $AWS_SECRET_ACCESS_KEY" > ~/.aws/credentials
+          # - echo -e "[profile portfolio]\nrole_arn = arn:aws:iam::209459165772:role/bitbucket-pipelines\nsource_profile = default" > ~/.aws/config
+          # - export AWS_DEFAULT_PROFILE=radioapp-prod
+          - export AWS_SDK_LOAD_CONFIG=1
+          # Deploy
+          - sls deploy --verbose
+
+pipelines: 
+  default: 
+    # - step: *build
+
+  branches: 
+    master:
+      - step: *deploy-prod

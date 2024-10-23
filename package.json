@@ -12,9 +12,6 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@types/aws-lambda": "^8.10.145",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.7.8",
     "esbuild": "^0.24.0",
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
@@ -26,6 +23,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.675.0",
+    "@types/aws-lambda": "^8.10.145",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.8",
     "@types/nodemailer": "^6.4.16",
     "aws-sdk": "^2.1691.0",
     "aws-serverless-express": "^3.4.0",
