@@ -33,7 +33,8 @@ provider:
     - Effect: Allow
       Action:
         - secretsmanager:*
-      Resource: '*'
+      Resource:
+        - arn:aws:secretsmanager:ap-southeast-1:*:secret:portfolio-v2-*
 functions:
   ${file(./functions/functions.yml)}
 # layers: 
